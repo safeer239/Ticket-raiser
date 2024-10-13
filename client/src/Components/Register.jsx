@@ -28,20 +28,22 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/register", {
-        name,
-        email,
-        password,
-      });
-      if(response.status ===200){
-        navigate("/home")
-      }
-      else{
+      const response = await axios.post(
+        "https://ticket-raiser-kp8j.onrender.com/register",
+        {
+          name,
+          email,
+          password,
+        }
+      );
+      if (response.status === 200) {
+        navigate("/home");
+      } else {
         toast.error("Registration failed");
       }
     } catch (error) {
-        console.log(error.message)
-        toast.error("An error occurred during registration");
+      console.log(error.message);
+      toast.error("An error occurred during registration");
     }
   };
 
