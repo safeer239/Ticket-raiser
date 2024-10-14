@@ -29,14 +29,15 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "https://ticket-raiser-kp8j.onrender.com/register",
+        "https://ticket-raiser-kp8j.onrender.com/auth/register",
         {
           name,
           email,
           password,
         }
       );
-      if (response.status === 200) {
+      console.log(response.data)
+      if (response.statusCode === 200){
         navigate("/home");
       } else {
         toast.error("Registration failed");
