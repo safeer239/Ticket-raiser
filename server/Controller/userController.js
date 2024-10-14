@@ -67,4 +67,9 @@ const login = asyncHandler(async (req, res) => {
     }
 })
 
-module.exports ={register,login}
+const getUser = asyncHandler(async (req, res) => {
+    const users=await User.find()
+    res.status(200).json({users})
+})
+
+module.exports ={register,login,getUser}

@@ -17,6 +17,10 @@ const userSchema =mongoose.Schema({
         type:Boolean,
         required:true,
         default:false
+    },
+    tickets:{
+        type:Array,
+        default:[]
     }
 },{
     timestamps:true

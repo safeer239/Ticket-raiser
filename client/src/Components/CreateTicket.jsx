@@ -1,9 +1,34 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "./NavBar";
 import toast from "react-hot-toast";
 import axios from "axios";
 
 const CreateTicket = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+        const response = await axios.get(
+          "https://ticket-raiser-kp8j.onrender.com/auth/users",
+          config
+        );
+        console.log(response);
+        setUsers(response.data.users);
+        console.log(users);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+    fetchUsers();
+  }, []);
+
   const [formData, setFormData] = useState({
     assignedTo: "",
     bugArea: "",
@@ -82,13 +107,19 @@ const CreateTicket = () => {
               </div>
               <div className="mb-3 flex flex-col">
                 <label htmlFor="email">Assigned To</label>
-                <input
-                  type="text"
+                <select
                   name="assignedTo"
                   value={formData.assignedTo}
                   onChange={handleChange}
                   className="py-2 rounded-md"
-                />
+                >
+                  <option value="">Select User</option>
+                  {users?.map((user) => (
+                    <option key={user.id} value={user.id}>
+                      {user._id}
+                    </option>
+                  ))}
+                </select>
               </div>
               <div className="mb-3 flex flex-col">
                 <label htmlFor="product">Bug Area</label>
@@ -112,7 +143,7 @@ const CreateTicket = () => {
                 ></textarea>
               </div>
               <div className=" flex justify-center items-center  ">
-                <button className="text-center text-xl rounded-md  bg-blue-700 px-4 py-2">
+                <button className="text-center text-white text-xl rounded-md  bg-blue-700 px-4 py-2">
                   Submit
                 </button>
               </div>

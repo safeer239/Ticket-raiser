@@ -17,6 +17,10 @@ const ticketSchema=mongoose.Schema({
     assignedTo:{
         type:String,
         required:true,
+    },
+    status:{
+        type:String,
+        default:"new",
     }
 },{
     timestamps:true
