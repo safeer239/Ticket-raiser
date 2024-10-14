@@ -37,7 +37,7 @@ const Register = () => {
         }
       );
       console.log(response.data)
-      if (response.statusCode === 200){
+      if (response.status === 200){
         navigate("/home");
       } else {
         toast.error("Registration failed");
