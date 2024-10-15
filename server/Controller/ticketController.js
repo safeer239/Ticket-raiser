@@ -17,11 +17,11 @@ const createTicket = asyncHandler(async (req, res) => {
     description: description,
     assignedTo: assignedTo,
   });
-  const assignedUser = await User.findById(assignedTo);
+  const assignedUser = await User.findOne({name:assignedTo});
 
   if (!assignedUser) {
     res.status(404);
-    throw new Error("Assigned user not found");
+    throw new Error(" 15 Assigned user not found");
   }
 
   assignedUser.tickets.push(ticket._id);
@@ -31,9 +31,9 @@ const createTicket = asyncHandler(async (req, res) => {
 });
 
 const viewTicket = asyncHandler(async (req, res) => {
-  const userId = req.user.id;
-  console.log(req.user.name)
-  const tickets = await Ticket.find({ assignedTo: userId });
+  const username = req.user.name;
+  console.log("21",req.user.name)
+  const tickets = await Ticket.find({ assignedTo: username });
   res.status(200).json(tickets);
 });
 

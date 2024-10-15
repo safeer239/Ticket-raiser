@@ -15,8 +15,9 @@ const CreateTicket = () => {
             Authorization: `Bearer ${token}`,
           },
         };
+        // const BASE_URL=process.env.REACT_APP_BASE_URL
         const response = await axios.get(
-          "https://ticket-raiser-kp8j.onrender.com/auth/users",
+          `https://ticket-raiser-kp8j.onrender.com/auth/users`,
           config
         );
         console.log(response);
@@ -27,7 +28,7 @@ const CreateTicket = () => {
       }
     };
     fetchUsers();
-  }, []);
+  },[]);
 
   const [formData, setFormData] = useState({
     assignedTo: "",
@@ -58,9 +59,9 @@ const CreateTicket = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-
+      // const BASE_URL=process.env.BASE_URL
       const response = await axios.post(
-        "https://ticket-raiser-kp8j.onrender.com/ticket/addTicket",
+        `https://ticket-raiser-kp8j.onrender.com/ticket/addTicket`,
         {
           assignedTo,
           bugArea,
@@ -69,6 +70,8 @@ const CreateTicket = () => {
         config
       );
       console.log(response);
+
+
 
       if (response.status === 201) {
         toast.success("Ticket created successfully");
@@ -115,8 +118,8 @@ const CreateTicket = () => {
                 >
                   <option value="">Select User</option>
                   {users?.map((user) => (
-                    <option key={user.id} value={user.id}>
-                      {user._id}
+                    <option key={user._id} value={user.name}>
+                      {user.name}
                     </option>
                   ))}
                 </select>

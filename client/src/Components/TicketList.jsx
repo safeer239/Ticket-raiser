@@ -18,9 +18,9 @@ const TicketList = () => {
             Authorization: `Bearer ${token}`,
           },
         };
-
+        // const BASE_URL=process.env.REACT_APP_BASE_URL
         const response = await axios.get(
-          "https://ticket-raiser-kp8j.onrender.com/ticket/viewTicket",
+          `https://ticket-raiser-kp8j.onrender.com/ticket/viewTicket`,
           config
         );
         setTickets(response.data);
@@ -56,7 +56,7 @@ const TicketList = () => {
           Authorization: `Bearer ${token}`,
         },
       };
-
+      
       const res = await axios.patch(
         `https://ticket-raiser-kp8j.onrender.com/ticket/updateTicket/${selectedTicket._id}`,
         { status: newStatus },
@@ -66,8 +66,9 @@ const TicketList = () => {
 
       toast.success("Ticket status updated successfully");
       closeModal();
+      // const BASE_URL=process.env.REACT_APP_BASE_URL
       const response = await axios.get(
-        "https://ticket-raiser-kp8j.onrender.com/ticket/viewTicket",
+        `https://ticket-raiser-kp8j.onrender.com/ticket/viewTicket`,
         config
       );
       setTickets(response.data);

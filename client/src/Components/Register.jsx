@@ -28,8 +28,9 @@ const Register = () => {
     }
 
     try {
+      // const BASE_URL=process.env.REACT_APP_BASE_URL
       const response = await axios.post(
-        "https://ticket-raiser-kp8j.onrender.com/auth/register",
+        `https://ticket-raiser-kp8j.onrender.com/auth/register`,
         {
           name,
           email,
